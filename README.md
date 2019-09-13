@@ -13,7 +13,7 @@ The final product looks like this: ![Final Product](https://www.notion.so/image/
 
 The hierarchy of the codebase can be shown below. ![UML Class Hierarchy of Coupon-Proj](https://www.lucidchart.com/publicSegments/view/a45c4ac1-b423-4132-a14a-be00ebccd228/image.png)
 
-It becomes apparent that Store Managers are at the top of the hierarchy since they manage all the different stores they are in charge of. On the side, there is a helper file which contains important constants used throughout the program and a helper function. There is also an example file which is used to test the code. Below are my notes on the important classes, and what each does in context of the app as a whole.
+It becomes apparent that Store Managers are at the top of the hierarchy since they manage all the different stores they are in charge of. On the side, there is a helper file which contains important constants used throughout the program and a helper function. There is also an example file which is used to test the code. Below are notes on the important classes, and what each does in context of the app as a whole.
 
 **Store Manager:** Registers stores and issue them a stock of coupons.
 
