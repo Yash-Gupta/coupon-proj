@@ -1,0 +1,4 @@
+import sys
+from example import process_args
+
+process_args(sys.argv[1:])
