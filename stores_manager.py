@@ -12,6 +12,10 @@ INITIAL_COUPON_STOCK = {
 }
 
 class StoresManager(metaclass=Singleton):
+  """
+  A Stores Manager manages and registers all stores. It issues them a standard stock of coupons 
+  initially. 
+  """
   def __init__(self) -> None:
     self.generator = CouponGenerator(COUPON_CODE_LENGTH)
     self.stores = set()
@@ -22,7 +26,6 @@ class StoresManager(metaclass=Singleton):
       self.issue_coupons(store)
 
   def issue_coupons(self, store: Store) -> None:
-    # Problem 1.1: YOUR CODE HERE
     assert store in self.stores, f"Cannot issue coupons to {store.name} since {store.name} is not registered!"
 
     # populate initial coupon stock for each type of coupon

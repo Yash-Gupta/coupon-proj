@@ -5,6 +5,10 @@ from typing import List
 import uuid
 
 class Customer:
+  """
+  A Customer has a personal starting Balance and maintains a list of Coupons. It can update this list of 
+  Coupons and use them during a Sale.
+  """
   def __init__(self, name: str) -> None:
     self.uuid = uuid.uuid5(NAMESPACE_ID, name)
     self.name = name

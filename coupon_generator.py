@@ -4,6 +4,9 @@ from typing import Type
 import string, random
 
 class CouponGenerator:
+  """
+  The Coupon Generator creates random, unique coupons given a code length. 
+  """
   MIN_CODE_LENGTH = 5
 
   def __init__(self, code_length: int) -> None:

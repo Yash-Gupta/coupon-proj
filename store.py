@@ -7,6 +7,10 @@ from typing import List, Type
 import uuid
 
 class Store:
+  """
+  A Store has a set inventory of coupons and a database of items. It can reward customers from its stock
+  and add items from its inventory to a Sale's Balance.
+  """
   def __init__(self, name: str, database: StoreDatabase) -> None:
     self.uuid = uuid.uuid5(NAMESPACE_ID, name)
     self.name = name
@@ -20,16 +24,19 @@ class Store:
     return list(filter(lambda rule: len(self.coupon_inventory[rule]) > 0, self.coupon_inventory.keys()))
 
   def reward_coupons(self, customer: Customer, rule: Type[CouponRule], num: int) -> List[Coupon]:
-    # Problem 1.3: YOUR CODE HERE
-    # initialize empty list of coupons
-    # if store's coupons for that type are less than what customer needs, return a list of all coupons for that type
-    # if not, return the first num coupons from the store, and remove it from the store
+
     assert num >= 0, f"Cannot award {num} coupons since {num} < 0!"
+
+    # Initialize empty list of coupons
     coupons_list = []
     coupon_rule_length = len(self.coupon_inventory[rule])
+
+    # If store's coupons for that type are less than what customer needs, return a list of all coupons for that type
     if num >= coupon_rule_length:
       coupons_list = self.coupon_inventory[rule]
       del self.coupon_inventory[rule]
+
+    # If not, return the first num coupons from the store, and remove it from the store
     else:
       coupons_list = self.coupon_inventory[rule][0:num]
       self.coupon_inventory[rule] = self.coupon_inventory[rule][num:coupon_rule_length]

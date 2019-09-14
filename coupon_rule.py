@@ -117,7 +117,6 @@ class FiveForFive(CouponRule):
   5 for 5 program: $5 off fruits and veggies.
   This coupon is rewarded when the customer spends $5 or more on a purchase (max 1 coupon rewarded per purchase)
   """
-  # Problem 2.1: YOUR CODE HERE
   
   @staticmethod
   def description():
@@ -130,19 +129,19 @@ class FiveForFive(CouponRule):
   @staticmethod
   def can_use(balance):
     total_fruit_veggie_value = category_value(balance, Category.FRUITS) + category_value(balance, Category.VEGGIES)
-    current_fruit_veggie_value = total_fruit_veggie_value - 5_00 * balance.five_for_five_used
-    return current_fruit_veggie_value > 0
+    discounted_fruit_veggie_value = total_fruit_veggie_value - 5_00 * balance.five_for_five_used
+    return discounted_fruit_veggie_value > 0
 
   @staticmethod
   def apply_discount(balance):
     # Find how much to discount
     total_fruit_veggie_value = category_value(balance, Category.FRUITS) + category_value(balance, Category.VEGGIES)
-    current_fruit_veggie_value = total_fruit_veggie_value - 5_00 * balance.five_for_five_used
+    discounted_fruit_veggie_value = total_fruit_veggie_value - 5_00 * balance.five_for_five_used
 
-    if current_fruit_veggie_value >= 5_00:
+    if discounted_fruit_veggie_value >= 5_00:
       difference = 5_00
     else:
-      difference = current_fruit_veggie_value
+      difference = discounted_fruit_veggie_value
     return min(difference, balance.amount())
 
 # ---------------

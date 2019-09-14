@@ -31,7 +31,6 @@ class Sale:
        + f" and {len(self.customer.coupons)} coupons")
 
   def scan_item(self, barcode: int) -> bool:
-    # Problem 1.2: YOUR CODE HERE
     # If the barcode exists, add the item to balance and return True; return False otherwise
     if barcode in self.store.database.items:
       item = self.store.database.items[barcode]
@@ -55,7 +54,6 @@ class Sale:
     return sorted(coupons, key=lambda coupon: priority_dict.get(coupon.rule, 0))
 
   def reward_coupons(self) -> List[Coupon]:
-    # Problem 1.3: YOUR CODE HERE
     # Iterate through store inventory and reward customers with a list of coupons if applicable
     coupons_list = []
     for rule in self.store.coupon_inventory:

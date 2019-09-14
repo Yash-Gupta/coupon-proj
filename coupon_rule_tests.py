@@ -1,9 +1,13 @@
 import unittest
 from balance import Balance, Category
-from coupon_rule import HalfOffHealthyPurchases, FiveForFive
+from coupon_rule import HalfOffHealthyPurchases, FiveForFive, TenOffPromo
+
+"""
+Contains tests to ensure all three coupon rules behave correctly
+"""
+
 
 class FiveForFiveTests(unittest.TestCase):
-  # Problem 2.2: YOUR CODE HERE
 
   def test_can_be_used_without_fruits_or_veggies(self):
     # Create balance without fruits or veggies => cannot use
@@ -22,13 +26,31 @@ class FiveForFiveTests(unittest.TestCase):
     self.assertEqual(FiveForFive.apply_discount(b), 2_00)  
   
   def test_apply_discount_balance_with_more_than_five(self):
-    # Create balance with $7 worth of fruits => discounts $5
+    # Create balance with $7 worth of fruits + veggies => discounts $5
     b = Balance()
     b.add_balance(2_00, Category.FRUITS, "a two dollar banana")
     b.add_balance(5_00, Category.VEGGIES, "five dollars of celery")
     self.assertTrue(FiveForFive.can_use(b))
     self.assertEqual(FiveForFive.apply_discount(b), 5_00)
+
+
+class TenOffPromoTests(unittest.TestCase):
+
+  def test_apply_discount_balance_with_less_than_ten(self):
+    # Create balance with $9 worth of fruits => discounts $9
+    b = Balance()
+    b.add_balance(9_00, Category.FRUITS, "a nine dollar fruit")
+    self.assertTrue(TenOffPromo.can_use(b))
+    self.assertEqual(TenOffPromo.apply_discount(b), 9_00)  
   
+  def test_apply_discount_balance_with_more_than_ten(self):
+    # Create balance with $11 worth of fruits => discounts $10
+    b = Balance()
+    b.add_balance(6_00, Category.FRUITS, "a six dollar banana")
+    b.add_balance(5_00, Category.VEGGIES, "five dollars of celery")
+    self.assertTrue(TenOffPromo.can_use(b))
+    self.assertEqual(TenOffPromo.apply_discount(b), 10_00)
+
 
 class HalfOffHealthyPurchasesTests(unittest.TestCase):
   def test_basic_discount(self):

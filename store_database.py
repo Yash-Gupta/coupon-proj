@@ -5,6 +5,9 @@ import csv
 ITEMS_FILE = './store_items.csv'
 
 class StoreDatabase:
+  """
+  The Store Database will set the store's initial inventory given a csv file
+  """
   def __init__(self, filename: str = ITEMS_FILE) -> None:
     self.items = self.read_items_from_file(filename)
 

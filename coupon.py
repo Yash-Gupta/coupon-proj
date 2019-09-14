@@ -2,6 +2,10 @@ from coupon_rule import CouponRule
 from typing import Type
 
 class Coupon:
+  """
+  A Coupon obeys rules and has a unique code. Coupons can be used by the customer and 
+  invalid afterwards.
+  """
   def __init__(self, rule: Type[CouponRule], code: str) -> None:
     self.rule = rule
     self.code = code

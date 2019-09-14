@@ -6,6 +6,43 @@ from store_database import StoreDatabase
 from stores_manager import StoresManager
 import sys
 
+def test_many_coupons_sale():
+  customer = Customer("Many-Coupons Person")
+  customer.balance.add_balance(1_012_00, description="Monthly earnings")
+
+  store = Store("Panda Bell", StoreDatabase())
+  StoresManager().register_store(store)
+  store.reward_coupons(customer, HalfOffHealthyPurchases, 100)
+  store.reward_coupons(customer, TenOffPromo, 1)
+  store.reward_coupons(customer, FiveForFive, 100)
+  
+  sale = Sale(customer, store)
+  sale.start_sale()
+  BARCODES = ['7810', '9694', '7810', '7126', '9478', '7126', '8840', '8840', '7126', '7111']
+  for code in BARCODES:
+    sale.scan_item(code)
+  
+  sale.use_coupons(customer.coupons)
+
+  sale.finish_sale()
+
+def test_no_coupons_sale():
+  customer = Customer("No-Coupons Person")
+  customer.balance.add_balance(1_012_00, description="Monthly earnings")
+
+  store = Store("Chipotle Express", StoreDatabase())
+  StoresManager().register_store(store)
+  
+  sale = Sale(customer, store)
+  sale.start_sale()
+  BARCODES = ['7810', '9694', '7810', '7126', '9478', '7126', '8840', '8840', '7126', '7111']
+  for code in BARCODES:
+    sale.scan_item(code)
+  
+  sale.use_coupons(customer.coupons)
+
+  sale.finish_sale()
+
 def test_full_sale():
   customer = Customer("Annie Ro")
   customer.balance.add_balance(1_012_00, description="Monthly earnings")
@@ -44,7 +81,6 @@ def test_basic_sale():
 
   sale.finish_sale()
 
-
 def process_args(args):
   if len(args) == 0:
     test_full_sale()
@@ -52,6 +88,10 @@ def process_args(args):
     test_basic_sale()
   elif args[0] == "--full":
     test_full_sale()
+  elif args[0] == "--no-coupons":
+    test_no_coupons_sale()
+  elif args[0] == "--many-coupons":
+    test_many_coupons_sale()
   else:
-    print("Invalid argument. Use --basic or --full to choose test case")
+    print("Invalid argument. Use --basic, --full,--no-coupons, or --many-coupons to choose test case")
 
