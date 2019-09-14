@@ -43,7 +43,7 @@ It becomes apparent that Store Managers are at the top of the hierarchy since th
 9. After all items are scanned, the Sale iterates through the Customer's Coupons.
 10. Each Coupon object has a type (HalfOffHealthyPurchases, TenOffPromo, FiveForFive), all of which behave according to certain rules. For example, whether a Coupon can be used or not, and how much a Coupon would discount from the Balance.
 11. When each Coupon is used, the appropriate discount is calculated and is added as a 'negative' item to the Balance (thereby lowering the Balance).
-12. Once Coupons are applied, the Sale is finished. The Balance is then deducted from the Customer's personal Balance.
+12. Once Coupons are applied, the Sale is finished. The Sale's Balance is then deducted from the Customer's personal Balance.
 13. The Sale then calculates what Coupons to reward to the Customer, and issues them from the Store's stock. These Coupons are now added to the Customer's personal stock of Coupons.
 14. The entire Sale is printed with some polishing and the workflow is finished!
 
